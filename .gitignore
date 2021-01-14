@@ -26,3 +26,5 @@ yarn-error.log*
 /frontend/debug.log
 /frontend/.env.local
 /frontend/.env.local
+/frontend/.env.local
+/frontend/.env.local
