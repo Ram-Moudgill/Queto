@@ -1,0 +1,77 @@
+.queto {
+  background: var(--white);
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.11) 0 1px;
+}
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 16px;
+  box-shadow: rgba(0, 0, 0, 0.11) 0 1px;
+}
+.user-date-cont {
+  display: flex;
+  align-items: center;
+}
+.post {
+  overflow-y: scroll;
+  height: 300px;
+  padding: 10px 0px;
+  margin: 6px 16px;
+  box-shadow: rgba(0, 0, 0, 0.11) 0 1px;
+  display: flex;
+  justify-content: center;
+  font-size: 1.4rem;
+  align-items: center;
+}
+.other {
+  padding: 5px 16px;
+  box-shadow: rgba(0, 0, 0, 0.11) 0 1px;
+}
+.post::-webkit-scrollbar {
+  width: 0.3em;
+}
+.post::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.post::-webkit-scrollbar-thumb {
+  background-color: var(--mutedgray);
+}
+.pop-overcont {
+  text-align: right;
+  position: relative;
+}
+.pop-over {
+  background: var(--white);
+  /* border: 1px solid var(--black); */
+  color: var(--black);
+  position: absolute;
+  top: 39px;
+  left: -56px;
+  text-align: left;
+  width: 62px;
+  padding: 3px;
+}
+.pop-over a {
+  color: var(--black);
+  text-decoration: none;
+}
+.display {
+  display: none;
+}
+.avatar-img {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  object-position: bottom;
+  object-fit: fill;
+}
+.other {
+  display: flex;
+  justify-content: space-between;
+}
+.fav-icon {
+  color: red;
+}

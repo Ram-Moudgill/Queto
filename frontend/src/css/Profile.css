@@ -1,0 +1,39 @@
+.profile {
+  position: absolute;
+  width: 200px;
+  background: var(--white);
+  position: fixed;
+  right: 120px;
+  top: 78px;
+}
+.profile-ul {
+  list-style: none;
+  padding: 0;
+}
+.profile-ul li:hover a {
+  background: var(--blue);
+  color: var(--white) !important;
+}
+.profile-ul li:hover {
+  background: var(--blue);
+  color: var(--white) !important;
+}
+.profile-ul li {
+  display: block;
+}
+.profile-ul p {
+  font-size: 0.9rem;
+  text-align: left;
+}
+.profile-ul a {
+  font-size: 0.9rem;
+  padding: 6px 20px 6px 17px;
+  display: block;
+  height: 100%;
+  text-decoration: none;
+  text-align: left;
+  color: var(--black);
+}
+.profile-ul a:hover {
+  color: var(--white);
+}

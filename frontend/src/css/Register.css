@@ -1,0 +1,18 @@
+.side-img {
+  width: 100%;
+}
+.form input {
+  background-color: #f3f3f4;
+  margin-bottom: 13px;
+}
+.form label {
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.btn-design1 {
+  color: var(--white) !important;
+  background: var(--blue) !important;
+}
+.form-row {
+  height: 100vh;
+}
