@@ -1,10 +1,5 @@
 import mongoose from 'mongoose'
 const quetoSchema = new mongoose.Schema({
-  userId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'userModel',
-    required: true,
-  },
   title: {
     type: String,
     required: [true, 'Please add title to the post'],
@@ -19,15 +14,21 @@ const quetoSchema = new mongoose.Schema({
     type: String,
     required: true,
     enum: [
-      'Love',
-      'Motivation',
-      'Friendship',
-      'Nature',
-      'Worship',
-      'God',
-      'Death',
+      'love',
+      'motivation',
+      'friendship',
+      'nature',
+      'death',
+      'birthday',
+      'worship',
+      'god',
       'Others',
     ],
+  },
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'userModel',
+    required: true,
   },
   likes: {
     type: Number,

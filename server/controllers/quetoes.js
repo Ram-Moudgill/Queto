@@ -1,5 +1,6 @@
 import quetoModel from '../models/queto.js'
 import ErrorHandler from '../utils/ErrorHandler.js'
+import { validationResult } from 'express-validator'
 //@access public
 //@endpoint /quetoes/api/v1/quetoes
 //@desc add new queto
@@ -18,20 +19,24 @@ export const getQuetoes = async (req, res, next) => {
 //@desc add new queto
 //method post
 export const addQueto = async (req, res, next) => {
-  console.log(req.userId)
+  const errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    return next(new ErrorHandler(errors.array()[0].msg), 400)
+  }
   const { title, category, queto } = req.body
-
+  const userId = req.userId
   try {
     const newQueto = new quetoModel({
-      userId: req.userId,
+      userId,
       title,
       queto,
       category,
     })
-    const Queto = await newQueto.save()
-    res.json(Queto)
+    await newQueto.save()
+    res.json('Queto uploaded successfully')
   } catch (error) {
-    next(error)
+    console.error(eror.message)
+    next(new ErrorHandler('server error'))
   }
 }
 //@access public
