@@ -7,6 +7,8 @@ import QuetoScreen from './Screens/QuetoScreen'
 import Register from './Screens/Register'
 import Login from './Screens/Login'
 import Activate from './Screens/Activate'
+import AddQueto from './Screens/AddQueto'
+import Userprofile from './Screens/Userprofile'
 const App = () => {
   return (
     <BrowserRouter>
@@ -21,6 +23,8 @@ const App = () => {
             <Route exact path='/login' component={Login}></Route>
             <Route exact path='/activate/:id' component={Activate}></Route>
             <Route exact path='/quetoes/:id' component={QuetoScreen}></Route>
+            <Route exact path='/addqueto' component={AddQueto}></Route>
+            <Route exact path='/profile' component={Userprofile}></Route>
             <Redirect to='/'></Redirect>
           </Switch>
         </main>

@@ -66,8 +66,12 @@ const Navbar = ({ brand }) => {
                     </IconButton>
                   </NavLink>
                 </li>
+
                 <li className='nav-item mx-lg-4'>
-                  <NavLink className='nav-link' to='/'>
+                  <NavLink
+                    className='nav-link'
+                    to={userInfo ? '/addqueto' : '/login'}
+                  >
                     <IconButton>
                       <AddIcon></AddIcon>
                     </IconButton>

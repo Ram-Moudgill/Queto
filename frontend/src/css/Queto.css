@@ -1,7 +1,7 @@
 .queto {
   background: var(--white);
   border-radius: 8px;
-  box-shadow: rgba(0, 0, 0, 0.11) 0 1px;
+  box-shadow: 0 1px 2px #00000033;
 }
 .top {
   display: flex;

@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import thunk from 'redux-thunk'
-import { quetoReducer } from './reducers/quetoReducer'
+import { addQuetoReducer, quetoReducer } from './reducers/quetoReducer'
 import {
   userloginReducer,
   userActivationReducer,
@@ -14,6 +14,7 @@ const reducer = combineReducers({
   userLogin: userloginReducer,
   userActivation: userActivationReducer,
   userRegister: userRegisterReducer,
+  addQueto: addQuetoReducer,
 })
 const userLoginStorage = localStorage.getItem('userInfo')
   ? JSON.parse(localStorage.getItem('userInfo'))

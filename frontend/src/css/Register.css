@@ -1,8 +1,8 @@
 .side-img {
   width: 100%;
 }
-.form input {
-  background-color: #f3f3f4;
+.input {
+  background-color: #f3f3f4 !important;
   margin-bottom: 13px;
 }
 .form label {
