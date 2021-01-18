@@ -11,6 +11,7 @@ import {
   LoginUser,
   deleteUser,
   activateAccount,
+  googleLogin,
 } from '../controllers/userAuth.js'
 import checkAuth from '../middlewares/checkAuth.js'
 const storage = multer.diskStorage({
@@ -63,6 +64,7 @@ router.post('/activate', activateAccount)
 //@desc login to existing account
 //method post
 router.post('/login', userValidationLogin, LoginUser)
+router.post('/googlelogin', googleLogin)
 //@access private
 //@endpoint /quetoes/api/v1/deleteaccount/:id
 //@desc delete user account

@@ -1,16 +1,16 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getQuetoes } from '../actions/quetoActions'
+import { mostLiked } from '../actions/quetoActions'
 import Queto from '../Components/Queto'
 import Loading from '../Components/Loading'
 import Message from '../Components/Message'
 import '../css/Home.css'
-const Home = () => {
+const Mostliked = () => {
   const dispatch = useDispatch()
-  const quetoData = useSelector((state) => state.quetoData)
-  const { error, quetoes, loading } = quetoData
+  const liked = useSelector((state) => state.mostLiked)
+  const { error, quetoes, loading } = liked
   useEffect(() => {
-    dispatch(getQuetoes())
+    dispatch(mostLiked())
   }, [dispatch])
 
   return (
@@ -35,4 +35,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default Mostliked

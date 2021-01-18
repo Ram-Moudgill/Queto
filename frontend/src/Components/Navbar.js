@@ -47,7 +47,7 @@ const Navbar = ({ brand }) => {
                   <NavLink
                     className='nav-link active'
                     aria-current='page'
-                    to='/home'
+                    to='/'
                   >
                     {' '}
                     <IconButton>
@@ -55,17 +55,18 @@ const Navbar = ({ brand }) => {
                     </IconButton>
                   </NavLink>
                 </li>
-                <li className='nav-item mx-lg-4'>
-                  <NavLink
-                    className='nav-link active'
-                    aria-current='page'
-                    to='/'
-                  >
+
+                <NavLink
+                  className='nav-link active'
+                  aria-current='page'
+                  to='/mostliked'
+                >
+                  <li className='nav-item mx-lg-4'>
                     <IconButton>
                       <FavoriteBorderIcon></FavoriteBorderIcon>{' '}
                     </IconButton>
-                  </NavLink>
-                </li>
+                  </li>
+                </NavLink>
 
                 <li className='nav-item mx-lg-4'>
                   <NavLink

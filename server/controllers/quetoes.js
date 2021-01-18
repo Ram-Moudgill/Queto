@@ -1,4 +1,5 @@
 import quetoModel from '../models/queto.js'
+// import userModel from '../models/userModel.js'
 import ErrorHandler from '../utils/ErrorHandler.js'
 import { validationResult } from 'express-validator'
 //@access public
@@ -7,7 +8,18 @@ import { validationResult } from 'express-validator'
 //method get
 export const getQuetoes = async (req, res, next) => {
   try {
-    const quetoes = await quetoModel.find()
+    let sortvalue
+    if (req.query.sort === 'likes') {
+      sortvalue = 'likes'
+      sortype = -1
+    } else {
+      sortvalue = 'createdAt'
+    }
+    console.log(sortvalue)
+    const quetoes = await quetoModel
+      .find()
+      .populate('user')
+      .sort({ $sortvalue: -1 })
     res.json(quetoes)
   } catch (error) {
     next(new ErrorHandler(error.message, 404))
@@ -24,10 +36,10 @@ export const addQueto = async (req, res, next) => {
     return next(new ErrorHandler(errors.array()[0].msg), 400)
   }
   const { title, category, queto } = req.body
-  const userId = req.userId
+  const user = req.userId
   try {
     const newQueto = new quetoModel({
-      userId,
+      user,
       title,
       queto,
       category,
@@ -66,7 +78,7 @@ export const deleteQueto = async (req, res, next) => {
     }
     console.log(req.userId)
     console.log(quetoForDel.userId)
-    if (quetoForDel.userId.toString() !== req.userId) {
+    if (quetoForDel.user.toString() !== req.userId) {
       return next(new ErrorHandler('not authorized', 401))
     }
     await quetoModel.findByIdAndDelete(req.params.id)
@@ -90,7 +102,7 @@ export const updateQueto = async (req, res, next) => {
     if (!checkQueto) {
       return res.status(404).json({ msg: 'Queto not found' })
     }
-    if (checkQueto.userId.toString() !== req.userId) {
+    if (checkQueto.user.toString() !== req.userId) {
       return next(new ErrorHandler('not authorized', 401))
     }
     await quetoModel.findByIdAndUpdate(
@@ -100,8 +112,16 @@ export const updateQueto = async (req, res, next) => {
       },
       { new: true }
     )
-    res.json({ msg: 'Queto updated Successfully' })
+    res.json('Queto updated Successfully')
   } catch (error) {
-    console.log(error)
+    next(new ErrorHandler(error.message, 404))
+  }
+}
+export const getUserQuetoes = async (req, res, next) => {
+  try {
+    const userquetoes = await quetoModel.find({ user: req.userId })
+    res.json(userquetoes)
+  } catch (error) {
+    next(new ErrorHandler(error.message, 404))
   }
 }

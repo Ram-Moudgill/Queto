@@ -61,6 +61,9 @@
 .display {
   display: none;
 }
+.display2 {
+  display: block !important;
+}
 .avatar-img {
   height: 40px;
   width: 40px;

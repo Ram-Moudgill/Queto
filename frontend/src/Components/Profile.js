@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import '../css/Profile.css'
 // import '../actions'
 import { logout } from '../actions/userActions'
@@ -15,7 +15,7 @@ const Profile = ({ popover, username }) => {
         <p className='pt-3 px-3'>Signed in as</p>
         <p className='font-weight-bold px-3'>{username}</p>
         <li className='text-left'>
-          <NavLink to='/'>Your Profile</NavLink>
+          <Link to='/profile'>Your Profile</Link>
         </li>
         <li
           className='text-left'

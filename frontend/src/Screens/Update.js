@@ -3,24 +3,33 @@ import '../css/Register.css'
 import Message from '../Components/Message'
 import Spinner from '../Components/Spinner'
 import { useDispatch, useSelector } from 'react-redux'
-import { addNewQueto } from '../actions/quetoActions'
-const AddQueto = ({ history }) => {
+import { getSingleQueto, updateQueto } from '../actions/quetoActions'
+const Update = ({ history, match }) => {
+  const dispatch = useDispatch()
+  const { userInfo } = useSelector((state) => state.userLogin)
   const [title, setTitle] = useState('')
   const [tags, setTags] = useState('')
   const [queto, setQueto] = useState('')
-  const dispatch = useDispatch()
-  const { userInfo } = useSelector((state) => state.userLogin)
+  const { singleQueto } = useSelector((state) => state.singleQueto)
+  const { error, loading, updateInfo } = useSelector(
+    (state) => state.updateInfo
+  )
   useEffect(() => {
     if (!userInfo) {
-      history.push(`/login`)
+      history.push(`/`)
+      console.log('data')
+    }
+    dispatch(getSingleQueto(match.params.id))
+    if (singleQueto) {
+      setTitle(singleQueto.title)
+      setTags(singleQueto.category)
+      setQueto(singleQueto.queto)
     }
   }, [history, userInfo])
-  const { loading, error, addQuetoInfo } = useSelector(
-    (state) => state.addQueto
-  )
+
   const handleSubmit = (e) => {
     e.preventDefault()
-    dispatch(addNewQueto(title, queto, tags))
+    dispatch(updateQueto(match.params.id, title, queto, tags))
     setTitle('')
     setQueto('')
     setTags('')
@@ -32,10 +41,10 @@ const AddQueto = ({ history }) => {
           <div className='row form-row d-flex justify-content-center align-items-center flex-column'>
             <div className='col-lg-4 col-md-7 col-sm-9  mx-auto'>
               <div className='upper-section d-flex justify-content-center flex-column'>
-                <h4 className='my-4'>Add a Queto</h4>
+                <h4 className='my-4'>Update a Queto</h4>
                 {error && <Message error={error} variant={'danger'}></Message>}
-                {addQuetoInfo && (
-                  <Message error={addQuetoInfo} variant={'success'}></Message>
+                {updateInfo && (
+                  <Message error={updateInfo} variant={'success'}></Message>
                 )}
                 {loading && <Spinner></Spinner>}
               </div>
@@ -90,13 +99,11 @@ const AddQueto = ({ history }) => {
                     onChange={(e) => {
                       setQueto(e.target.value)
                     }}
-                    // minLength='8'
-                    // required
                   />
                   <input
                     className='btn btn-design1 mt-4 btn-block form-control'
                     type='submit'
-                    value='Upload Queto'
+                    value='Update Queto'
                   />
                 </form>
               </div>
@@ -108,4 +115,4 @@ const AddQueto = ({ history }) => {
   )
 }
 
-export default AddQueto
+export default Update

@@ -18,7 +18,7 @@
 }
 .nav__btn:hover {
   color: var(--white);
-  box-shadow: 0 1rem 2.5rem var(--blue), 0 0.5rem 1rem -0.75rem var(--blue) !important;
+  box-shadow: 0 1rem 1rem #1876f26b, 0 0.5rem 1rem -0.75rem var(--blue) !important;
   -webkit-transform: translate3d(0, -3px, 0);
   transform: translate3d(0, -3px, 0);
 }

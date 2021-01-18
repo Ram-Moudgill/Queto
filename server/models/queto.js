@@ -8,7 +8,7 @@ const quetoSchema = new mongoose.Schema({
   queto: {
     type: String,
     required: true,
-    maxlength: [300, 'Queto length could not be more than 300 words'],
+    maxlength: [2000, 'Queto length could not be more than 300 words'],
   },
   category: {
     type: String,
@@ -25,9 +25,9 @@ const quetoSchema = new mongoose.Schema({
       'Others',
     ],
   },
-  userId: {
+  user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'userModel',
+    ref: 'user',
     required: true,
   },
   likes: {

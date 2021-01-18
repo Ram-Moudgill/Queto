@@ -24,7 +24,7 @@ body {
   transition: all 0.1s linear;
 }
 .nav__row {
-  position: fixed;
+  position: sticky;
   top: 0;
   width: 100%;
   background: var(--white);
@@ -65,4 +65,31 @@ body {
 main {
   /* min-height: 160vh; */
   background: var(--mutedgray);
+}
+.box__shadow {
+  box-shadow: rgba(0, 0, 0, 0.11) 0 1px;
+}
+.pop-btn {
+  background-color: transparent;
+  border-top: 1px solid #dbdbdb;
+  cursor: pointer;
+  line-height: 1.5;
+  margin: 0 !important;
+  min-height: 48px;
+  padding: 4px 8px !important;
+  font-weight: 100;
+  font-size: 0.8rem;
+}
+.modal-dialog {
+  max-width: 368px !important;
+}
+.pop-span {
+  font-size: 14px;
+  position: absolute;
+  right: 13px;
+  top: -27px;
+  background: black;
+  color: white;
+  padding: 5px;
+  border-radius: 4px;
 }

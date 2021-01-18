@@ -1,8 +1,17 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import thunk from 'redux-thunk'
-import { addQuetoReducer, quetoReducer } from './reducers/quetoReducer'
 import {
+  addQuetoReducer,
+  quetoReducer,
+  userquetoReducer,
+  deleteReducer,
+  singleQuetoReducer,
+  updateQuetoReducer,
+  mostLikesQuetoReducer,
+} from './reducers/quetoReducer'
+import {
+  // userquetoReducer,
   userloginReducer,
   userActivationReducer,
   userRegisterReducer,
@@ -14,7 +23,12 @@ const reducer = combineReducers({
   userLogin: userloginReducer,
   userActivation: userActivationReducer,
   userRegister: userRegisterReducer,
+  userProfile: quetoReducer,
   addQueto: addQuetoReducer,
+  deleteQuetoes: deleteReducer,
+  singleQueto: singleQuetoReducer,
+  updateInfo: updateQuetoReducer,
+  mostLiked: mostLikesQuetoReducer,
 })
 const userLoginStorage = localStorage.getItem('userInfo')
   ? JSON.parse(localStorage.getItem('userInfo'))

@@ -1,6 +1,6 @@
 import React from 'react'
 import Navbar from './Components/Navbar'
-import Footer from './Components/Footer'
+// import Footer from './Components/Footer'
 import { Route, BrowserRouter, Switch, Redirect } from 'react-router-dom'
 import Home from './Screens/Home'
 import QuetoScreen from './Screens/QuetoScreen'
@@ -9,6 +9,8 @@ import Login from './Screens/Login'
 import Activate from './Screens/Activate'
 import AddQueto from './Screens/AddQueto'
 import Userprofile from './Screens/Userprofile'
+import Update from './Screens/Update'
+import Mostliked from './Screens/Mostliked'
 const App = () => {
   return (
     <BrowserRouter>
@@ -24,7 +26,9 @@ const App = () => {
             <Route exact path='/activate/:id' component={Activate}></Route>
             <Route exact path='/quetoes/:id' component={QuetoScreen}></Route>
             <Route exact path='/addqueto' component={AddQueto}></Route>
+            <Route exact path='/updatequeto/:id' component={Update}></Route>
             <Route exact path='/profile' component={Userprofile}></Route>
+            <Route exact path='/mostliked' component={Mostliked}></Route>
             <Redirect to='/'></Redirect>
           </Switch>
         </main>

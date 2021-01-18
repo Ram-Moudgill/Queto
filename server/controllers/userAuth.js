@@ -5,6 +5,8 @@ import bcrypt from 'bcryptjs'
 import userModel from '../models/user.js'
 import errorHandler from '../middlewares/errorHandler.js'
 import nodemailer from 'nodemailer'
+import { OAuth2Client } from 'google-auth-library'
+
 //@access public
 //@endpoint /quetoes/api/v1/register
 //desc register a new user into database
@@ -33,7 +35,7 @@ export const registerUser = async (req, res, next) => {
         image: req.file.path,
       },
       process.env.SECRET,
-      { expiresIn: 60 * 60 }
+      { expiresIn: '30d' }
     )
 
     const transporter = nodemailer.createTransport({
@@ -124,7 +126,7 @@ export const LoginUser = async (req, res, next) => {
         id: checkLogin._id,
       },
       process.env.SECRET,
-      { expiresIn: 60 * 60 }
+      { expiresIn: '30d' }
     )
     res.json({
       token: token,
@@ -141,4 +143,58 @@ export const LoginUser = async (req, res, next) => {
 //method delete
 export const deleteUser = (req, res, next) => {
   res.send(`delete user ${req.params.id}`)
+}
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID)
+export const googleLogin = async (req, res, next) => {
+  const { idToken } = req.body
+  try {
+    const response = await client.verifyIdToken({
+      idToken,
+      audience: process.env.GOOGLE_CLIENT_ID,
+    })
+    // console.log(response.payload)
+    const { email_verified, name, email, picture } = response.payload
+    if (!email_verified) {
+      return next(new ErrorHandler('Not Authorized', 400))
+    }
+    const checkUserData = await userModel.findOne({ email })
+    console.log(email)
+    if (checkUserData) {
+      console.log(checkUserData)
+      const token = jwt.sign(
+        {
+          id: checkUserData._id,
+        },
+        process.env.SECRET,
+        { expiresIn: '30d' }
+      )
+      return res.json({
+        token: token,
+        data: 'data',
+        username: checkUserData.username,
+        image: checkUserData.image,
+      })
+    }
+    const newUser = new userModel({
+      username: name,
+      email: email,
+      password: email + process.env.SECRET,
+      image: picture,
+    })
+    const createdUser = await newUser.save()
+    const token = jwt.sign(
+      {
+        id: createdUser._id,
+      },
+      process.env.SECRET,
+      { expiresIn: '30d' }
+    )
+    return res.json({
+      token: token,
+      username: createdUser.username,
+      image: createdUser.image,
+    })
+  } catch (error) {
+    console.log(error)
+  }
 }

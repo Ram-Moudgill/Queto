@@ -85,7 +85,6 @@ export const registerUser = (image, username, email, password) => async (
   dispatch
 ) => {
   try {
-    console.log(image)
     const formData = new FormData()
     console.log(formData)
     formData.append('image', image)
@@ -120,5 +119,51 @@ export const registerUser = (image, username, email, password) => async (
           ? error.response.data.message
           : error.message,
     })
+    setTimeout(() => {
+      dispatch({
+        type: USER_REGISTER_FAILED,
+        payload: '',
+      })
+    }, 7000)
+  }
+}
+export const googleLogin = (idToken) => async (dispatch) => {
+  try {
+    dispatch({
+      type: USER_LOGIN_REQUEST,
+    })
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+
+    const { data } = await axios.post(
+      '/quetoes/api/v1/googlelogin',
+      { idToken },
+      config
+    )
+
+    dispatch({
+      type: USER_LOGIN_SUCCESS,
+      payload: data,
+    })
+
+    localStorage.setItem('userInfo', JSON.stringify(data))
+  } catch (error) {
+    dispatch({
+      type: USER_LOGIN_FAILED,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
+    setTimeout(() => {
+      dispatch({
+        type: USER_LOGIN_FAILED,
+        payload: '',
+      })
+    }, 7000)
   }
 }

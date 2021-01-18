@@ -14,5 +14,6 @@
   background: var(--blue) !important;
 }
 .form-row {
-  height: 100vh;
+  min-height: 75vh;
+  height: 100%;
 }
