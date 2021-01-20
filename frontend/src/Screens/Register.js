@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import sideImg from '../images/img.png'
+import sideImg from '../images/regsiter.png'
 import { Link } from 'react-router-dom'
 import { registerUser, googleLogin } from '../actions/userActions'
 import '../css/Register.css'
@@ -36,7 +36,12 @@ const Register = ({ history }) => {
         <div className='col-md-4 p-0 flex-column d-flex justify-content-center align-items-center'>
           <div
             className='img-header d-flex justify-content-center flex-column align-items-center'
-            style={{ width: '100%', background: '#F3D186', height: '14vh' }}
+            style={{
+              width: '100%',
+              background: '#181C3C',
+              height: '14vh',
+              color: '#fff',
+            }}
           >
             <h5>Queto</h5>
             <h5>get latest Quetos all over the World</h5>
@@ -49,14 +54,19 @@ const Register = ({ history }) => {
           ></img>
           <div
             className='img-footer d-flex align-items-center justify-content-center'
-            style={{ width: '100%', background: '#F3D186', height: '13.5vh' }}
+            style={{
+              width: '100%',
+              background: '#181C3C',
+              height: '13.5vh',
+              color: '#fff',
+            }}
           >
             <p>img by queto</p>
           </div>
         </div>
         <div className='col-md-8'>
           <div className='row form-row d-flex justify-content-center align-items-center flex-column'>
-            <div className='col-md-5 mx-auto'>
+            <div className='col-lg-5  col-md-9 mx-auto'>
               <p className='text-right'>
                 Already a member?{' '}
                 <Link to='login' style={{ textDecoration: 'none' }}>

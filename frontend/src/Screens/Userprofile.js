@@ -1,24 +1,21 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import '../css/Userprofile.css'
 import { Link } from 'react-router-dom'
-import MoreVertIcon from '@material-ui/icons/MoreVert'
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined'
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined'
 import IconButton from '@material-ui/core/IconButton'
 import Loading from '../Components/Loading'
 import Message from '../Components/Message'
 import { userQuetos, deleteQueto } from '../actions/quetoActions'
+import { Avatar } from '@material-ui/core'
 const Userprofile = ({ history }) => {
   const dispatch = useDispatch()
   const { userInfo } = useSelector((state) => state.userLogin)
   const userProfile = useSelector((state) => state.userProfile)
-  const {
-    deleteloading: loadingDelete,
-    error: errorDelete,
-    deleteQuetoInfo: successDelete,
-  } = useSelector((state) => state.deleteQuetoes)
-  console.log(successDelete)
+  const { deleteQuetoInfo: successDelete } = useSelector(
+    (state) => state.deleteQuetoes
+  )
   const { error, quetoes, loading } = userProfile
 
   useEffect(() => {
@@ -27,17 +24,7 @@ const Userprofile = ({ history }) => {
       history.push(`/login`)
     }
     dispatch(userQuetos())
-  }, [history, userInfo, successDelete])
-  // const [popover, setPopover] = useState(false)
-  // const changePopover = (e) => {
-  //   e.stopPropagation()
-  //   if (popover === true) {
-  //     setPopover(false)
-  //   } else {
-  //     setPopover(true)
-  //     // document.body.style.background = 'rgba(0,0,0,.65)'
-  //   }
-  // }
+  }, [history, userInfo, successDelete, dispatch])
   const deletequeto = (value) => {
     if (window.confirm('Are you sure?')) {
       dispatch(deleteQueto(value))
@@ -48,11 +35,7 @@ const Userprofile = ({ history }) => {
       <div className='row px-0 m-0 ' style={{ paddingTop: '130px' }}>
         <div className='col-md-10 mx-auto d-flex justify-content-center align-items-center flex-column box__shadow'>
           <div style={{ border: '6px solid #fff', borderRadius: '50%' }}>
-            <img
-              className='user-profile-img'
-              src={userInfo && userInfo.image}
-              alt='user image'
-            />
+            <Avatar src={userInfo && userInfo.image}></Avatar>
           </div>
           <h1 className='text-center username my-4'>
             {userInfo && userInfo.username}

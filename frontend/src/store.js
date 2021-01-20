@@ -4,7 +4,7 @@ import thunk from 'redux-thunk'
 import {
   addQuetoReducer,
   quetoReducer,
-  userquetoReducer,
+  // userquetoReducer,
   deleteReducer,
   singleQuetoReducer,
   updateQuetoReducer,
@@ -15,6 +15,8 @@ import {
   userloginReducer,
   userActivationReducer,
   userRegisterReducer,
+  forgotReqReducer,
+  forgotpassReducer,
 } from './reducers/userReducer'
 import jwt from 'jsonwebtoken'
 const middleware = [thunk]
@@ -29,6 +31,8 @@ const reducer = combineReducers({
   singleQueto: singleQuetoReducer,
   updateInfo: updateQuetoReducer,
   mostLiked: mostLikesQuetoReducer,
+  forgotPassReq: forgotReqReducer,
+  forgotPass: forgotpassReducer,
 })
 const userLoginStorage = localStorage.getItem('userInfo')
   ? JSON.parse(localStorage.getItem('userInfo'))

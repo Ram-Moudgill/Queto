@@ -11,6 +11,9 @@ import AddQueto from './Screens/AddQueto'
 import Userprofile from './Screens/Userprofile'
 import Update from './Screens/Update'
 import Mostliked from './Screens/Mostliked'
+import ForgetRequest from './Screens/FogetRequest'
+import ForgotPass from './Screens/ForgotPass'
+
 const App = () => {
   return (
     <BrowserRouter>
@@ -27,8 +30,14 @@ const App = () => {
             <Route exact path='/quetoes/:id' component={QuetoScreen}></Route>
             <Route exact path='/addqueto' component={AddQueto}></Route>
             <Route exact path='/updatequeto/:id' component={Update}></Route>
+            <Route exact path='/forgotpass/:id' component={ForgotPass}></Route>
             <Route exact path='/profile' component={Userprofile}></Route>
             <Route exact path='/mostliked' component={Mostliked}></Route>
+            <Route
+              exact
+              path='/forgotrequest'
+              component={ForgetRequest}
+            ></Route>
             <Redirect to='/'></Redirect>
           </Switch>
         </main>

@@ -24,9 +24,10 @@ body {
   transition: all 0.1s linear;
 }
 .nav__row {
-  position: sticky;
+  position: fixed;
   top: 0;
   width: 100%;
+  z-index: 99;
   background: var(--white);
 }
 .text-green {
@@ -63,8 +64,9 @@ body {
   color: var(--blue);
 }
 main {
-  /* min-height: 160vh; */
+  min-height: 80vh;
   background: var(--mutedgray);
+  padding-top: 93px;
 }
 .box__shadow {
   box-shadow: rgba(0, 0, 0, 0.11) 0 1px;
@@ -92,4 +94,10 @@ main {
   color: white;
   padding: 5px;
   border-radius: 4px;
+}
+.red {
+  color: #ff0000;
+}
+.green {
+  color: greenyellow;
 }

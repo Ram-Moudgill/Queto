@@ -9,6 +9,12 @@ import {
   USER_REGISTER_REQUEST,
   USER_REGISTER_SUCCESS,
   USER_REGISTER_FAILED,
+  USER_PASS_FORGOT_REQUEST,
+  USER_PASS_FORGOT_SUCCESS,
+  USER_PASS_FORGOT_FAILED,
+  USER_PASSFORGOT_REQUEST,
+  USER_PASSFORGOT_SUCCESS,
+  USER_PASSFORGOT_FAILED,
 } from '../constants/userTypes'
 import axios from 'axios'
 export const loginUser = (email, password) => async (dispatch) => {
@@ -165,5 +171,69 @@ export const googleLogin = (idToken) => async (dispatch) => {
         payload: '',
       })
     }, 7000)
+  }
+}
+export const forgotRequest = (email) => async (dispatch) => {
+  try {
+    dispatch({
+      type: USER_PASS_FORGOT_REQUEST,
+    })
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+
+    const { data } = await axios.post(
+      '/quetoes/api/v1/forgotrequest',
+      { email },
+      config
+    )
+
+    dispatch({
+      type: USER_PASS_FORGOT_SUCCESS,
+      payload: data,
+    })
+  } catch (error) {
+    dispatch({
+      type: USER_PASS_FORGOT_FAILED,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
+  }
+}
+export const forgotPass = (token, password) => async (dispatch) => {
+  try {
+    dispatch({
+      type: USER_PASSFORGOT_REQUEST,
+    })
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+
+    const { data } = await axios.put(
+      `/quetoes/api/v1/forgothandler`,
+      { token, password },
+      config
+    )
+
+    dispatch({
+      type: USER_PASSFORGOT_SUCCESS,
+      payload: data,
+    })
+  } catch (error) {
+    dispatch({
+      type: USER_PASSFORGOT_FAILED,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
   }
 }

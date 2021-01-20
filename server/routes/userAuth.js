@@ -5,6 +5,8 @@ const router = express.Router()
 import {
   userValidationLogin,
   userValidationRegister,
+  forgotpasswordValidation,
+  forgotpasswordHandlerValidation,
 } from '../utils/uservalidation.js'
 import {
   registerUser,
@@ -12,6 +14,8 @@ import {
   deleteUser,
   activateAccount,
   googleLogin,
+  forgetRequest,
+  forgotHandler,
 } from '../controllers/userAuth.js'
 import checkAuth from '../middlewares/checkAuth.js'
 const storage = multer.diskStorage({
@@ -70,5 +74,14 @@ router.post('/googlelogin', googleLogin)
 //@desc delete user account
 //method delete
 router.delete('/deleteaccount/:id', checkAuth, deleteUser)
-
+//@access private
+//@endpoint /quetoes/api/v1/forggtpassword
+//@desc delete user account
+//method delete
+router.post('/forgotrequest', forgotpasswordValidation, forgetRequest)
 export default router
+//@access private
+//@endpoint /quetoes/api/v1/forgethandler
+//activate user
+//method get
+router.put('/forgothandler', forgotpasswordHandlerValidation, forgotHandler)

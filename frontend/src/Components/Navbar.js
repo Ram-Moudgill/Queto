@@ -11,13 +11,21 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 import { useSelector } from 'react-redux'
 import Avatar from '@material-ui/core/avatar'
 
-const Navbar = ({ brand }) => {
+const Navbar = () => {
   const [popover, setPopover] = useState(false)
   const changePopover = () => {
     if (popover === true) {
       setPopover(false)
     } else {
       setPopover(true)
+    }
+  }
+  const [search, setSearch] = useState(false)
+  const searchToggle = () => {
+    if (search === true) {
+      setSearch(false)
+    } else {
+      setSearch(true)
     }
   }
   const [position, setposition] = useState(false)
@@ -40,7 +48,7 @@ const Navbar = ({ brand }) => {
           <nav className='navbar navbar-expand-lg px-0 mx-0'>
             <div className='container-fluid p-0'>
               <NavLink className='navbar-brand' to='/'>
-                {brand}
+                <i class='fas fa-feather'></i>
               </NavLink>
               <ul className='navbar-ul mx-auto mb-2 mb-lg-0'>
                 <li className='nav-item mx-lg-4'>
@@ -88,8 +96,7 @@ const Navbar = ({ brand }) => {
               </ul>
               {userInfo ? (
                 <IconButton onClick={changePopover}>
-                  <img className='avatar-img' src={userInfo.image} alt='' />
-                  {/* <Avatar src={userInfo.image}></Avatar> */}
+                  <Avatar src={userInfo.image}></Avatar>
                   <Profile
                     popover={popover}
                     username={userInfo.username}

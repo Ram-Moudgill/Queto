@@ -9,6 +9,7 @@ import {
   getQuetoes,
   updateQueto,
   getUserQuetoes,
+  likeQueto,
 } from '../controllers/quetoes.js'
 router
   .get('/quetoes', getQuetoes)
@@ -17,5 +18,6 @@ router
   .get('/quetoes/:id', getQueto)
   .delete('/quetoes/:id', checkAuth, deleteQueto)
   .put('/quetoes/:id', checkAuth, updateQueto)
+router.put('/quetoes/likequeto', checkAuth, likeQueto)
 router.get('/userquetoes', checkAuth, getUserQuetoes)
 export default router

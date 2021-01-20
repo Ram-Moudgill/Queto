@@ -22,8 +22,7 @@
   box-shadow: rgba(0, 0, 0, 0.11) 0 1px;
   display: flex;
   justify-content: center;
-  font-size: 1.4rem;
-  align-items: center;
+  font-size: 1.3rem;
 }
 .other {
   padding: 5px 16px;

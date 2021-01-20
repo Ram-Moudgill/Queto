@@ -14,10 +14,16 @@ const Update = ({ history, match }) => {
   const { error, loading, updateInfo } = useSelector(
     (state) => state.updateInfo
   )
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    dispatch(updateQueto(match.params.id, title, queto, tags))
+    // setTitle('')
+    // setQueto('')
+    // setTags('')
+  }
   useEffect(() => {
     if (!userInfo) {
       history.push(`/`)
-      console.log('data')
     }
     dispatch(getSingleQueto(match.params.id))
     if (singleQueto) {
@@ -25,15 +31,7 @@ const Update = ({ history, match }) => {
       setTags(singleQueto.category)
       setQueto(singleQueto.queto)
     }
-  }, [history, userInfo])
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    dispatch(updateQueto(match.params.id, title, queto, tags))
-    setTitle('')
-    setQueto('')
-    setTags('')
-  }
+  }, [history, match.params.id, dispatch, singleQueto])
   return (
     <>
       <div className='row m-0 p-0' style={{ background: '#fff' }}>

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import sideImg from '../images/img.png'
 import '../css/Register.css'
 import { Link } from 'react-router-dom'
 import Message from '../Components/Message'
@@ -109,6 +108,10 @@ const Login = ({ history }) => {
                       setPassword(e.target.value)
                     }}
                   />
+
+                  <Link to='/forgotrequest' style={{ textDecoration: 'none' }}>
+                    forgot password?
+                  </Link>
                   <input
                     className='btn btn-design1 mt-4 btn-block form-control input'
                     type='submit'

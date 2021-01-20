@@ -34,10 +34,11 @@ const Queto = ({ queto }) => {
       <div className='queto my-4'>
         <div className='top'>
           <div className='user-date-cont'>
-            <Avatar src={queto.user.image}></Avatar>
-            {/* <img className='avatar-img' src={myimg} alt='no img' /> */}
+            <Avatar src={queto && queto.user.image}></Avatar>
             <div className='userdate ml-3'>
-              <small>{queto.user.username}</small>
+              <small style={{ textTransform: 'capitalize' }}>
+                {queto.user.username}
+              </small>
               <br />
               <small>
                 {newDate[1]}

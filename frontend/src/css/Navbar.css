@@ -29,9 +29,9 @@
   font-size: 1.2rem;
 }
 .nav-link:hover {
-  color: var(--blue);
-  background: var(--mutedgray);
-  border-radius: 6px;
+  color: var(--blue) !important;
+  /* background: var(--mutedgray); */
+  /* border-radius: 6px; */
 }
 .nav-link:active {
   color: var(--blue);

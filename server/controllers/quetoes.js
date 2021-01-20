@@ -8,19 +8,20 @@ import { validationResult } from 'express-validator'
 //method get
 export const getQuetoes = async (req, res, next) => {
   try {
-    let sortvalue
-    if (req.query.sort === 'likes') {
-      sortvalue = 'likes'
-      sortype = -1
-    } else {
-      sortvalue = 'createdAt'
-    }
-    console.log(sortvalue)
+    // let sortvalue
+    // if (req.query.sort === 'likes') {
+    //   sortvalue = 'likes'
+    //   sortype = -1
+    // } else {
+    //   sortvalue = 'createdAt'
+    // }
+    // console.log(sortvalue)
     const quetoes = await quetoModel
       .find()
       .populate('user')
-      .sort({ $sortvalue: -1 })
+      .sort({ createdAt: -1 })
     res.json(quetoes)
+    // console.log(quetoes)
   } catch (error) {
     next(new ErrorHandler(error.message, 404))
   }
@@ -121,6 +122,33 @@ export const getUserQuetoes = async (req, res, next) => {
   try {
     const userquetoes = await quetoModel.find({ user: req.userId })
     res.json(userquetoes)
+  } catch (error) {
+    next(new ErrorHandler(error.message, 404))
+  }
+}
+export const likeQueto = async (req, res, next) => {
+  const { id } = req.body
+  if (!id) {
+    next(new ErrorHandler('Not Authorized', 401))
+  }
+
+  try {
+    const checkQueto = await quetoModel.findById(id)
+    if (!checkQueto) {
+      return res.status(404).json({ msg: 'Queto not found' })
+    }
+    console.log(req.query)
+    const quetoFields = {
+      likes: 401,
+    }
+    await quetoModel.findByIdAndUpdate(
+      checkQueto._id,
+      {
+        $set: quetoFields,
+      },
+      { new: true }
+    )
+    res.json('like added Successfully')
   } catch (error) {
     next(new ErrorHandler(error.message, 404))
   }

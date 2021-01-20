@@ -198,3 +198,82 @@ export const googleLogin = async (req, res, next) => {
     console.log(error)
   }
 }
+
+export const forgetRequest = async (req, res, next) => {
+  const errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    return next(new ErrorHandler(errors.array()[0].msg, 400))
+  }
+  const { email } = req.body
+  try {
+    const checkEmail = await userModel.findOne({ email })
+    if (!checkEmail) {
+      return next(
+        new ErrorHandler('no account found associated with this email', 400)
+      )
+    }
+    const token = jwt.sign(
+      {
+        email: checkEmail.email,
+      },
+      process.env.SECRET,
+      { expiresIn: '30d' }
+    )
+
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: 'rammoudgill3054@gmail.com',
+        pass: 'R@m2647c',
+      },
+    })
+    const mailOptions = {
+      from: 'rammoudgill3054@gmail.com',
+      to: email,
+      subject: 'You can reset your queto password by clicking on this link',
+      text: `${process.env.CLIENT}/forgotpass/${token}`,
+    }
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        console.log(error)
+      } else {
+        console.log('Email sent: ' + info.response)
+      }
+    })
+    res.json(`Forgot password link has been sent on ${email}`)
+  } catch (error) {
+    console.log(error)
+    next(new ErrorHandler(error.message))
+  }
+}
+export const forgotHandler = async (req, res, next) => {
+  const errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    return next(new ErrorHandler(errors.array()[0].msg, 400))
+  }
+  const { token, password } = req.body
+  // console.log(token)
+  if (!token) {
+    return next(new ErrorHandler('unauthorized', 401))
+  }
+  try {
+    const decoded = await jwt.verify(token, process.env.SECRET)
+    const { email } = decoded
+    const checkEmailbs = await userModel.findOne({ email })
+    if (!checkEmailbs) {
+      return next(new ErrorHandler('Failed', 400))
+    }
+    const salt = await bcrypt.genSalt(10)
+    const newpassword = await bcrypt.hash(password, salt)
+    await userModel.findByIdAndUpdate(
+      checkEmailbs._id,
+      {
+        $set: { password: newpassword },
+      },
+      { new: true }
+    )
+    res.json('password updated Successfully')
+  } catch (error) {
+    next(new ErrorHandler('invalid token', 400))
+  }
+}
